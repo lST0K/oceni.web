@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-         Hocemo li da ocenimo nesto? Commit test!
+         Hocemo li da ocenimo nesto? Commit test 2!
         </p>
       </header>
     </div>
