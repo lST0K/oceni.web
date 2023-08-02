@@ -8,22 +8,14 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
-export  function ThemeToogler() {
+export  function ThemeToogler(props) {
 
     const theme = useTheme();
     const colorMode = React.useContext(ColorModeContext);
   
     return (
-      <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'right',
-        bgcolor: 'background.default',
-        color: 'text.primary',
-        borderRadius: 1
-      }}
-    >
-      <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
+      <Box className={props.className} onClick={colorMode.toggleColorMode}>
+      <IconButton sx={{ ml: 1 }}  color="inherit">
         {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
       </IconButton>
     </Box>

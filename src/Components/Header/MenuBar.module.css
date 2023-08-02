@@ -1,0 +1,12 @@
+.menuBar {
+    display: flex;
+    justify-content:space-between;
+  }
+
+ .inline{
+  display: flex;
+  gap: 10px;
+ }
+
+
+  
