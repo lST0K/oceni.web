@@ -56,7 +56,7 @@ function SingIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            {language.signIn}
           </Typography>
           <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1 }}>
             <TextField
@@ -64,7 +64,7 @@ function SingIn() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label={language.emailAddress}
               name="email"
               autoComplete="email"
               autoFocus
@@ -75,7 +75,7 @@ function SingIn() {
               required
               fullWidth
               name="password"
-              label="Password"
+              label={language.password}
               type="password"
               id="password"
               autoComplete="current-password"
@@ -83,7 +83,7 @@ function SingIn() {
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              label={language.rememberMe}
             />
             <Button
               type="submit"
@@ -98,12 +98,12 @@ function SingIn() {
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                {language.forgotPassword}?
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                {language.dontHaveAnAccount}? {language.signUp}
                 </Link>
               </Grid>
             </Grid>
