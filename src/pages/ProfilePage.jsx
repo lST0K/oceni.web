@@ -5,4 +5,4 @@ const ProfilePage = () =>{
     )
 }
 
-export default ProfilePage;
+export { ProfilePage };

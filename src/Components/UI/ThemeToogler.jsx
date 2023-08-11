@@ -15,9 +15,9 @@ export  function ThemeToogler(props) {
   
     return (
       <Box className={props.className} onClick={colorMode.toggleColorMode}>
-      <IconButton sx={{ ml: 1 }}  color="inherit">
-        {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-      </IconButton>
-    </Box>
+        <IconButton sx={{ ml: 1 }}  color="inherit">
+          {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+        </IconButton>
+      </Box>
     );
   }
