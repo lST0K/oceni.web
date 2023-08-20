@@ -9,7 +9,7 @@ import {HomePage, ProfilePage} from './pages';
 import { useMediaQuery } from '@mui/material';
 import { getThemeModeFromCookie, setThemeModeInCookie } from './utils/ThemeUtils';
 import { history } from '_helpers';
-import { SingIn ,ColorModeContext, MenuBar, PrivateRoute} from 'components';
+import { SignIn,SignUp, ColorModeContext, MenuBar, PrivateRoute} from 'components';
 
 
 
@@ -52,13 +52,18 @@ function App() {
               <Routes>
                 <Route 
                     path="/" 
+                    element={ <HomePage />} 
+                />
+                 <Route 
+                    path="/profile" 
                     element={
                       <PrivateRoute>
-                        <HomePage />
+                        <ProfilePage />
                       </PrivateRoute>
                     } 
                 />
-                <Route path="/signin" element={<SingIn />} />
+                <Route path="/signin" element={<SignIn />} />
+                <Route path="/signup" element={<SignUp />} />
                 <Route path="*" element={<Navigate to="/" />} />
               </Routes>
           </React.StrictMode> 

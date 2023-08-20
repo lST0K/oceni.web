@@ -12,7 +12,7 @@ function User() {
 
     const authUser = useSelector(x => x.auth.user);
     const dispatch = useDispatch();
-    const logout = () => dispatch(authActions.logout());
+    const logout = () => dispatch(authActions.signout());
 
     return (
 

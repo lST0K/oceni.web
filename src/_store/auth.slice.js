@@ -28,38 +28,47 @@ function createInitialState() {
 
 function createReducers() {
     return {
-        logout
+        signout
     };
 
-    function logout(state) {
+    function signout(state) {
         state.user = null;
         localStorage.removeItem('user');
-        history.navigate('/login');
+        history.navigate('/signin');
     }
 }
 
 function createExtraActions() {
-    const baseUrl = `${process.env.REACT_APP_API_URL}/users`;
+    const baseUrl = `${process.env.REACT_APP_API_URL}/auth`;
 
     return {
-        login: login()
+        signin: signin(),
+        signup: signup(),
     };    
 
-    function login() {
+    function signin() {
         return createAsyncThunk(
-            `${name}/login`,
-            async ({ username, password }) => await fetchWrapper.post(`${baseUrl}/authenticate`, { username, password })
+            `${name}/signin`,
+            async ({ username, password, provider }) => await fetchWrapper.post(`${baseUrl}/signin`, { username, password, provider })
+        );
+    }
+
+    function signup() {
+        return createAsyncThunk(
+            `${name}/signup`,
+            async ({ username, password, email, firstname, lastname, provider }) => await fetchWrapper.post(`${baseUrl}/signup`, { username, password, email, firstname, lastname, provider })
         );
     }
 }
 
 function createExtraReducers() {
     return {
-        ...login()
+        ...signin(),
+        ...signup()
     };
 
-    function login() {
-        var { pending, fulfilled, rejected } = extraActions.login;
+    function signin() {
+        var { pending, fulfilled, rejected } = extraActions.signin;
         return {
             [pending]: (state) => {
                 state.error = null;
@@ -70,10 +79,33 @@ function createExtraReducers() {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
                 state.user = user;
-
                 // get return url from location state or default to home page
-                const { from } = history.location.state || { from: { pathname: '/' } };
-                history.navigate(from);
+                const { from } = history.location.state || '/' ;
+                
+                history.location = from || '/'  ;
+            },
+            [rejected]: (state, action) => {
+                state.error = action.error;
+            }
+        };
+    }
+
+    function signup() {
+        var { pending, fulfilled, rejected } = extraActions.signup;
+        return {
+            [pending]: (state) => {
+                state.error = null;
+            },
+            [fulfilled]: (state, action) => {
+                const user = action.payload;
+                
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('user', JSON.stringify(user));
+                state.user = user;
+                // get return url from location state or default to home page
+                const { from } = history.location.state || '/' ;
+                
+                history.location = from || '/'  ;
             },
             [rejected]: (state, action) => {
                 state.error = action.error;
